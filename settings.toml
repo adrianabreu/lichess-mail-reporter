@@ -1,0 +1,6 @@
+username = "your_username"
+sender_mail = "your_source_mail@example.com"
+sender_name = "test"
+recipients = ["recipient1@example.com", "recipient2@example.com"]
+template_uid = "your_template_uid"
+mail_token = "your_mail_token"

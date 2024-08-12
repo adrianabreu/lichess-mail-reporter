@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "lichess-mail-reporter"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "lichess_mail_reporter"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.32.3"
+berserk = "^0.13.2"
+mailtrap = "^2.0.1"
+pydantic-settings = "^2.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
