@@ -1,5 +1,5 @@
 from typing import List, Type, Tuple
-from pydantic import Field
+from pydantic import Field, EmailStr
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -7,14 +7,15 @@ from pydantic_settings import (
     TomlConfigSettingsSource,
 )
 
+
 class Settings(BaseSettings):
-    username: str = Field(...)
-    sender_name: str = Field(...)
-    sender_mail: str = Field(...)
-    recipients: List[str] = Field(...)
-    template_uid: str = Field(...)
-    mail_token: str = Field(...)
-    model_config = SettingsConfigDict(toml_file='settings.toml')
+    username: str = Field()
+    sender_name: str = Field()
+    sender_mail: EmailStr = Field()
+    recipients: List[EmailStr] = Field()
+    template_uid: str = Field()
+    mail_token: str = Field()
+    model_config = SettingsConfigDict(toml_file="settings.toml")
 
     @classmethod
     def settings_customise_sources(
