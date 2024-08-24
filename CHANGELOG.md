@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.0.0...v1.0.1) (2024-08-24)
+
+
+### Miscellaneous Chores
+
+* release 1.0.1 ([cde7362](https://github.com/adrianabreu/lichess-mail-reporter/commit/cde736204a6667adb57f2f6f37688a3c1264b289))
+
 ## 1.0.0 (2024-08-15)
 
 
