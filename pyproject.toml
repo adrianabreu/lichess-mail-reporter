@@ -1,23 +1,23 @@
-[tool.poetry]
+[project]
 name = "lichess-mail-reporter"
+requires-python = ">=3.11"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = [{name="Adrian Abreu", email="adrianabreugonzalez@proton.me"}]
 readme = "README.md"
-packages = [{include = "lichess_mail_reporter"}]
+dependencies = [
+    "requests==2.32.3",
+    "berserk==0.13.2",
+    "mailtrap==2.0.1",
+    "pydantic-settings==2.4.0",
+    "pydantic [email]==2.8.2"
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-requests = "^2.32.3"
-berserk = "^0.13.2"
-mailtrap = "^2.0.1"
-pydantic-settings = "^2.4.0"
-pydantic = {extras = ["email"], version = "^2.8.2"}
+[tool.uv]
+dev-dependencies=[
+"pytest-mock==3.14.0",
+"ruff==0.5.7"
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest-mock = "^3.14.0"
-ruff = "^0.5.7"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.hatch.build.targets.wheel]
+packages = ["lichess_mail_reporter"]
