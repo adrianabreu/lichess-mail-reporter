@@ -65,11 +65,11 @@ def calculate_statistics(parsed_games):
 
     statistics = {
         "total_played_games": total_games,
-        "winning_ratio": total_wins / total_games if total_games > 0 else 0,
-        "winning_ratio_as_white": total_white_wins / total_white_games
+        "winning_ratio": round(total_wins / total_games,2) if total_games > 0 else 0,
+        "winning_ratio_as_white": round(total_white_wins / total_white_games, 2)
         if total_white_games > 0
         else 0,
-        "winning_ratio_as_black": total_black_wins / total_black_games
+        "winning_ratio_as_black": round(total_black_wins / total_black_games, 2)
         if total_black_games > 0
         else 0,
         "most_frequent_first_move_as_white": f"{most_frequent_white_move[0]} ({most_frequent_white_move[1]} times)"
