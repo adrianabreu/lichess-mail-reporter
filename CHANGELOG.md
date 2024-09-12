@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.0.1...v1.0.2) (2024-09-12)
+
+
+### Bug Fixes
+
+* :pencil2: Formatted ratios to fit properly in mail ([7d152a6](https://github.com/adrianabreu/lichess-mail-reporter/commit/7d152a6866d7bdebb046ef163791107c480ffdfc))
+
 ## [1.0.1](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.0.0...v1.0.1) (2024-08-24)
 
 
