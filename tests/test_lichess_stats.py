@@ -76,16 +76,18 @@ def test_calculate_statistics():
         {"result": 0, "first_move": "d4", "color": "white"},
         {"result": 1, "first_move": "d5", "color": "black"},
         {"result": 0, "first_move": "e5", "color": "black"},
+        {"result": 0, "first_move": "e5", "color": "black"},
+        {"result": 0, "first_move": "d4", "color": "white"}
     ]
 
     statistics = calculate_statistics(parsed_games)
 
     expected = {
-        "total_played_games": 4,
-        "winning_ratio": 0.5,
-        "winning_ratio_as_white": 0.5,
-        "winning_ratio_as_black": 0.5,
-        "most_frequent_first_move_as_white": "e4 (1 times)",
-        "most_frequent_first_move_as_black": "d5 (1 times)",
+        "total_played_games": 6,
+        "winning_ratio": 0.33,
+        "winning_ratio_as_white": 0.33,
+        "winning_ratio_as_black": 0.33,
+        "most_frequent_first_move_as_white": "d4 (2 times)",
+        "most_frequent_first_move_as_black": "e5 (2 times)",
     }
     assert statistics == expected
