@@ -1,0 +1,17 @@
+Hey, {{username}}!
+
+Here is your weekly lichess summary:
+
+You played {{total_played_games}} games.
+Your winning ratio is {{winning_ratio}}.
+
+As white statistics:
+Winning ratio: {{winning_ratio_as_white}}.
+Preferred first_move: {{most_frequent_first_move_as_white}}.
+
+As black statistics:
+Winning ratio: {{winning_ratio_as_black}}.
+Preferred first_move: {{most_frequent_first_move_as_black}}.
+
+--
+Keep rocking!
