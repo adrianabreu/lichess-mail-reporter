@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.2.0...v1.3.0) (2024-09-14)
+
+
+### Features
+
+* :fire: Use quickcharts on mail ([9670ed5](https://github.com/adrianabreu/lichess-mail-reporter/commit/9670ed5a93943296e436b494aa152d986745cae4))
+
 ## [1.2.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.1.0...v1.2.0) (2024-09-14)
 
 
