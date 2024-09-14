@@ -2,7 +2,7 @@
 FROM python:3.11-buster as builder
 
 ENV VIRTUAL_ENV=/home/packages/.venv
-COPY --from=ghcr.io/astral-sh/uv:0.3.3 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.4.10 /uv /bin/uv
 
 ADD . /app
 WORKDIR /app
