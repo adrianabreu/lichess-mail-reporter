@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.1.0...v1.2.0) (2024-09-14)
+
+
+### Features
+
+* :sparkles: Add graph to mail reports ([5ba50de](https://github.com/adrianabreu/lichess-mail-reporter/commit/5ba50deac50a7eb4f501d68cca6f0bb915ce6048))
+
 ## [1.1.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.0.1...v1.1.0) (2024-09-14)
 
 
