@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.3.0...v1.3.1) (2024-09-14)
+
+
+### Bug Fixes
+
+* :bug: Force new release ([0d42170](https://github.com/adrianabreu/lichess-mail-reporter/commit/0d421709dfc1cb496cc8511d25450cf3af1323aa))
+
 ## [1.3.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.2.0...v1.3.0) (2024-09-14)
 
 
