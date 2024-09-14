@@ -1,4 +1,4 @@
-from lichess_mail_reporter.lichess import get_games, parse_games, calculate_statistics
+from lichess_mail_reporter.lichess import get_games, parse_games, calculate_statistics, add_graphs
 from lichess_mail_reporter.mail_report import send_mail
 from lichess_mail_reporter.config import Settings
 from datetime import datetime, timedelta
@@ -14,6 +14,7 @@ user = settings.username
 games = get_games(client, start, end, user)
 parsed_games = parse_games(games, user)
 stats = calculate_statistics(parsed_games)
+stats_with_graphs = add_graphs(stats)
 
 send_mail(
     sender_mail=settings.sender_mail,
@@ -21,5 +22,5 @@ send_mail(
     recipients=settings.recipients,
     template_uuid=settings.template_uid,
     mail_token=settings.mail_token,
-    data=dict(stats, username=user),
+    data=dict(stats_with_graphs, username=user),
 )

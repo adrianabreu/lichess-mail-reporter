@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.0.2...v1.1.0) (2024-09-13)
+
+
+### Features
+
+* :truck: Add template used in mailtrap ([82c58c3](https://github.com/adrianabreu/lichess-mail-reporter/commit/82c58c304019648d0b299b00c2b08d5710a8f5e2))
+
 ## [1.0.2](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.0.1...v1.0.2) (2024-09-12)
 
 
