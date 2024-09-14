@@ -89,6 +89,7 @@ def test_calculate_statistics():
         "winning_ratio_as_black": 0.33,
         "most_frequent_first_move_as_white": "d4 (2 times)",
         "most_frequent_first_move_as_black": "e5 (2 times)",
-        "graph_winning_ratio": [0.33, 0.67],
+        "wins": 2,
+        "loses": 4,
     }
     assert statistics == expected
