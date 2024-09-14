@@ -118,11 +118,12 @@
                   </table>
                   <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#F6FAFB">
                     <tr>
-                      <img src="data:image/png;base64,{{graph_winning_ratio}}">
+                      <img style="display: block; width: 100%; height:auto;"
+                        src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Win','Lose'],datasets:[{data: [{{graph_winning_ratio}}]}]}}">
                     </tr>
                     <tr>
                       <td
-                        style="padding: 8px 0 16px 10px; font-size: 18px; line-height: 150%; font-weight: 800; color: #000000; letter-spacing: 0.01em;">
+                        style="padding: 8px 0 16px 30px; font-size: 18px; line-height: 150%; font-weight: 800; color: #000000; letter-spacing: 0.01em;">
                         White
                       </td>
                       <td
@@ -150,7 +151,9 @@
                         Preferred move {{most_frequent_first_move_as_black}}
                       </td>
                     </tr>
+
                   </table>
+
                   <table width="100%" cellspacing="0" cellpadding="0" border="0">
                     <tr>
                       <td style="padding: 16px 0 8px;">
@@ -168,6 +171,7 @@
                     </tr>
                     <tr>
                     <tr>
+
                       <td style="padding: 0 0 16px;">
                         <span style="display: block; width: 117px; border-bottom: 1px solid #8B949F;"></span>
                       </td>

@@ -2,8 +2,6 @@ from datetime import datetime
 from typing import Any, Dict
 from berserk import Client
 from collections import Counter
-import plotly.graph_objects as go
-import base64
 
 
 def get_games(
@@ -80,23 +78,10 @@ def calculate_statistics(parsed_games) -> Dict[str, Any]:
         "most_frequent_first_move_as_black": f"{most_frequent_black_move[0]} ({most_frequent_black_move[1]} times)"
         if most_frequent_black_move
         else None,
+        "graph_winning_ratio": [
+            round(total_wins / total_games, 2),
+            round(1 - total_wins / total_games, 2),
+        ],
     }
 
-    return statistics
-
-
-def add_graphs(statistics: Dict[str, Any]) -> Dict[str, Any]:
-    fig = go.Figure()
-    fig.add_trace(
-        go.Pie(
-            labels=["Wins", "Losses"],
-            values=[
-                statistics["total_played_games"],
-                statistics["total_played_games"] - statistics["total_played_games"],
-            ],
-        )
-    )
-    png = fig.to_image(format="png", engine="kaleido")
-    png_base64 = base64.b64encode(png).decode("ascii")
-    statistics["graph_winning_ratio"] = png_base64
     return statistics
