@@ -1,4 +1,9 @@
-from lichess_mail_reporter.lichess import get_games, parse_games, calculate_statistics, add_graphs
+from lichess_mail_reporter.lichess import (
+    get_games,
+    parse_games,
+    calculate_statistics,
+    add_graphs,
+)
 from lichess_mail_reporter.mail_report import send_mail
 from lichess_mail_reporter.config import Settings
 from datetime import datetime, timedelta

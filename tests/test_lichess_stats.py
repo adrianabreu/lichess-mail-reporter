@@ -77,7 +77,7 @@ def test_calculate_statistics():
         {"result": 1, "first_move": "d5", "color": "black"},
         {"result": 0, "first_move": "e5", "color": "black"},
         {"result": 0, "first_move": "e5", "color": "black"},
-        {"result": 0, "first_move": "d4", "color": "white"}
+        {"result": 0, "first_move": "d4", "color": "white"},
     ]
 
     statistics = calculate_statistics(parsed_games)
