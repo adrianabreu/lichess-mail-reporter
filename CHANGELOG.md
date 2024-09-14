@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.3.1...v1.3.2) (2024-09-14)
+
+
+### Bug Fixes
+
+* :bug: Template can't handle array properly, let's use two values ([5eb033d](https://github.com/adrianabreu/lichess-mail-reporter/commit/5eb033db84264d1bf2524f54443c859a1109f5f8))
+
 ## [1.3.1](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.3.0...v1.3.1) (2024-09-14)
 
 
