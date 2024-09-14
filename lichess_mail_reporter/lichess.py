@@ -2,6 +2,8 @@ from datetime import datetime
 from typing import Any, Dict
 from berserk import Client
 from collections import Counter
+import plotly.graph_objects as go
+import base64
 
 
 def get_games(
@@ -37,7 +39,7 @@ def parse_games(games: list[Dict[str, Any]], user: str) -> list[Dict[str, Any]]:
     return parsed_games
 
 
-def calculate_statistics(parsed_games):
+def calculate_statistics(parsed_games) -> Dict[str, Any]:
     total_games = len(parsed_games)
     total_wins = sum(game["result"] for game in parsed_games)
     total_white_games = sum(game["color"] == "white" for game in parsed_games)
@@ -80,4 +82,21 @@ def calculate_statistics(parsed_games):
         else None,
     }
 
+    return statistics
+
+
+def add_graphs(statistics: Dict[str, Any]) -> Dict[str, Any]:
+    fig = go.Figure()
+    fig.add_trace(
+        go.Pie(
+            labels=["Wins", "Losses"],
+            values=[
+                statistics["total_played_games"],
+                statistics["total_played_games"] - statistics["total_played_games"],
+            ],
+        )
+    )
+    png = fig.to_image(format="png", engine="kaleido")
+    png_base64 = base64.b64encode(png).decode("ascii")
+    statistics["graph_winning_ratio"] = png_base64
     return statistics
