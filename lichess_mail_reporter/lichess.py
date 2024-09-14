@@ -78,10 +78,8 @@ def calculate_statistics(parsed_games) -> Dict[str, Any]:
         "most_frequent_first_move_as_black": f"{most_frequent_black_move[0]} ({most_frequent_black_move[1]} times)"
         if most_frequent_black_move
         else None,
-        "graph_winning_ratio": [
-            round(total_wins / total_games, 2),
-            round(1 - total_wins / total_games, 2),
-        ],
+        "wins": total_wins,
+        "loses": total_games - total_wins
     }
 
     return statistics
