@@ -3,6 +3,7 @@
 <!-- Also adapt TXT version of this email -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <title></title>
   <!--[if !mso]><!-- -->
@@ -114,76 +115,87 @@
                           Your winning ratio is <b>{{winning_ratio}}</b>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center"
+                            bgcolor="#F6FAFB">
+                            <tr>
+                              <td style="width: 455px">
+                                <img style="display: block; width: 100%; border:0; outline:none;"
+                                  src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Win','Lose'],datasets:[{data: [{{graph_winning_ratio}}]}]},options:{plugins:{datalabels:{color:'white',backgroundColor:'gray'}}}}">
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table width="100%">
+                            <tr>
+                              <td
+                                style="padding: 8px 0 16px 30px; font-size: 18px; line-height: 150%; font-weight: 800; color: #000000; letter-spacing: 0.01em;">
+                                White
+                              </td>
+                              <td
+                                style="padding: 8px 0 16px 10px; font-size: 18px; line-height: 150%; font-weight: 800; color: #000000; letter-spacing: 0.01em;">
+                                Black
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="padding: 0 0 0 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
+                                Winning ratio {{winning_ratio_as_white}}
+                              </td>
+                              <td
+                                style="padding: 0 0 0 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
+                                Winning ratio {{winning_ratio_as_black}}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="padding: 0 0 16px 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
+                                Preferred move {{most_frequent_first_move_as_white}}
+                              </td>
+                              <td
+                                style="padding: 0 0 16px 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
+                                Preferred move {{most_frequent_first_move_as_black}}
+                              </td>
+                            </tr>
+
+                          </table>
+                        </td>
+                      </tr>
+                      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                          <td style="padding: 16px 0 8px;">
+                            <a href="https://lichess.org/@/{{username}}">
+
+                              <span
+                                style="width: 90%; font-size: 14px; line-height: 150%; font-weight: bold; color: #29426E; letter-spacing: 0.01em;">See
+                                on lichess</span>
+                              <span style="width: 10%; float: right;">
+                                <strong>→</strong>
+                              </span>
+                            </a>
+                          </td>
+
+                        </tr>
+                        <tr>
+                        <tr>
+
+                          <td style="padding: 0 0 16px;">
+                            <span style="display: block; width: 117px; border-bottom: 1px solid #8B949F;"></span>
+                          </td>
+                        </tr>
+                    </tbody>
                   </table>
-                  <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#F6FAFB">
-                    <tr>
-                      <img style="display: block; width: 100%; height:auto;"
-                        src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Win','Lose'],datasets:[{data: [{{wins}},{{loses}}]}]}}">
-                    </tr>
-                    <tr>
-                      <td
-                        style="padding: 8px 0 16px 30px; font-size: 18px; line-height: 150%; font-weight: 800; color: #000000; letter-spacing: 0.01em;">
-                        White
-                      </td>
-                      <td
-                        style="padding: 8px 0 16px 10px; font-size: 18px; line-height: 150%; font-weight: 800; color: #000000; letter-spacing: 0.01em;">
-                        Black
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="padding: 0 0 0 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
-                        Winning ratio {{winning_ratio_as_white}}
-                      </td>
-                      <td
-                        style="padding: 0 0 0 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
-                        Winning ratio {{winning_ratio_as_black}}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="padding: 0 0 16px 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
-                        Preferred move {{most_frequent_first_move_as_white}}
-                      </td>
-                      <td
-                        style="padding: 0 0 16px 10px; font-size: 14px; line-height: 150%; font-weight: 400; color: #000000; letter-spacing: 0.01em;">
-                        Preferred move {{most_frequent_first_move_as_black}}
-                      </td>
-                    </tr>
-
-                  </table>
-
-                  <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                      <td style="padding: 16px 0 8px;">
-                        <a href="https://lichess.org/@/{{username}}">
-
-                          <span
-                            style="width: 90%; font-size: 14px; line-height: 150%; font-weight: bold; color: #29426E; letter-spacing: 0.01em;">See
-                            on lichess</span>
-                          <span style="width: 10%; float: right;">
-                            <strong>→</strong>
-                          </span>
-                        </a>
-                      </td>
-
-                    </tr>
-                    <tr>
-                    <tr>
-
-                      <td style="padding: 0 0 16px;">
-                        <span style="display: block; width: 117px; border-bottom: 1px solid #8B949F;"></span>
-                      </td>
-                    </tr>
+                </td>
+              </tr>
             </tbody>
           </table>
         </td>
       </tr>
     </tbody>
-  </table>
-  </td>
-  </tr>
-  </tbody>
   </table>
 </body>
 
