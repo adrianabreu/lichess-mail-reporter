@@ -80,7 +80,12 @@ def test_calculate_statistics():
         {"result": 0, "first_move": "d4", "color": "white"},
     ]
 
-    statistics = calculate_statistics(parsed_games)
+    user_stats = [
+        {"ts": datetime(2024,9,7), "elo": 1500},
+        {"ts": datetime(2024,9,6), "elo": 1505}
+    ]
+
+    statistics = calculate_statistics(parsed_games, user_stats)
 
     expected = {
         "total_played_games": 6,
@@ -91,5 +96,7 @@ def test_calculate_statistics():
         "most_frequent_first_move_as_black": "e5 (2 times)",
         "wins": 2,
         "loses": 4,
+        "days_played": [datetime(2024,9,7), datetime(2024,9,6)],
+        "elo": [1500, 1505],
     }
     assert statistics == expected

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any, Dict, List
 from berserk import Client
 from collections import Counter
 
@@ -11,6 +11,12 @@ def get_games(
         user, since=start_date, until=end_date, max=300
     )
     return list(games)
+
+def get_user_statistics(berserk: Client, start_date: datetime, user: str) -> List[Dict[str, Any]]:
+    activity_feed = berserk.users.get_activity_feed(user)
+    parsed_data = [{"ts": item["interval"]["end"], "elo": item["games"]["blitz"]["rp"]["after"]} for item in activity_feed]
+
+    return list(filter(lambda x: x["ts"] >= start_date, parsed_data))
 
 
 def get_first_move(moves, player_color):
@@ -37,7 +43,7 @@ def parse_games(games: list[Dict[str, Any]], user: str) -> list[Dict[str, Any]]:
     return parsed_games
 
 
-def calculate_statistics(parsed_games) -> Dict[str, Any]:
+def calculate_statistics(parsed_games, user_stats) -> Dict[str, Any]:
     total_games = len(parsed_games)
     total_wins = sum(game["result"] for game in parsed_games)
     total_white_games = sum(game["color"] == "white" for game in parsed_games)
@@ -63,6 +69,8 @@ def calculate_statistics(parsed_games) -> Dict[str, Any]:
         Counter(black_first_moves).most_common(1)[0] if black_first_moves else None
     )
 
+    
+
     statistics = {
         "total_played_games": total_games,
         "winning_ratio": round(total_wins / total_games, 2) if total_games > 0 else 0,
@@ -79,7 +87,10 @@ def calculate_statistics(parsed_games) -> Dict[str, Any]:
         if most_frequent_black_move
         else None,
         "wins": total_wins,
-        "loses": total_games - total_wins
+        "loses": total_games - total_wins,
+        "days_played": [x["ts"] for x in user_stats],
+        "elo": [x["elo"] for x in user_stats]
     }
 
     return statistics
+
