@@ -1,16 +1,27 @@
-from datetime import datetime
-from typing import Any, Dict
-from berserk import Client
+
+from typing import Any, Dict, List
+from berserk import Client, utils
 from collections import Counter
 
 
 def get_games(
-    berserk: Client, start_date: datetime, end_date: datetime, user: str
+    berserk: Client, start_date: int, end_date: int, user: str
 ) -> list[Dict[str, Any]]:
     games = berserk.games.export_by_player(
         user, since=start_date, until=end_date, max=300
     )
     return list(games)
+
+
+def get_user_statistics(
+    berserk: Client, start_date: int, user: str
+) -> List[Dict[str, Any]]:
+    activity_feed = berserk.users.get_activity_feed(user)
+    parsed_data = [
+        {"ts": item["interval"]["end"], "elo": item["games"]["blitz"]["rp"]["after"]}
+        for item in activity_feed
+    ]
+    return list(filter(lambda x: utils.to_millis(x["ts"]) >= start_date, parsed_data))
 
 
 def get_first_move(moves, player_color):
@@ -37,49 +48,52 @@ def parse_games(games: list[Dict[str, Any]], user: str) -> list[Dict[str, Any]]:
     return parsed_games
 
 
-def calculate_statistics(parsed_games) -> Dict[str, Any]:
+def calculate_statistics(parsed_games, user_stats) -> Dict[str, Any]:
     total_games = len(parsed_games)
-    total_wins = sum(game["result"] for game in parsed_games)
-    total_white_games = sum(game["color"] == "white" for game in parsed_games)
-    total_black_games = sum(game["color"] == "black" for game in parsed_games)
-    total_white_wins = sum(
-        game["result"] for game in parsed_games if game["color"] == "white"
-    )
-    total_black_wins = sum(
-        game["result"] for game in parsed_games if game["color"] == "black"
-    )
 
-    white_first_moves = [
-        game["first_move"] for game in parsed_games if game["color"] == "white"
-    ]
-    black_first_moves = [
-        game["first_move"] for game in parsed_games if game["color"] == "black"
-    ]
+    def count_games(condition):
+        return sum(condition(game) for game in parsed_games)
 
-    most_frequent_white_move = (
-        Counter(white_first_moves).most_common(1)[0] if white_first_moves else None
+    total_wins = count_games(lambda game: game["result"])
+    total_white_games = count_games(lambda game: game["color"] == "white")
+    total_black_games = total_games - total_white_games
+    total_white_wins = count_games(
+        lambda game: game["result"] and game["color"] == "white"
     )
-    most_frequent_black_move = (
-        Counter(black_first_moves).most_common(1)[0] if black_first_moves else None
-    )
+    total_black_wins = total_wins - total_white_wins
+
+    def get_first_moves(color):
+        return [game["first_move"] for game in parsed_games if game["color"] == color]
+
+    def get_most_frequent_move(moves):
+        return Counter(moves).most_common(1)[0] if moves else None
+
+    white_first_moves = get_first_moves("white")
+    black_first_moves = get_first_moves("black")
+
+    def format_move(move):
+        return f"{move[0]} ({move[1]} times)" if move else None
+
+    def safe_ratio(numerator, denominator):
+        return round(numerator / denominator, 2) if denominator > 0 else 0
 
     statistics = {
         "total_played_games": total_games,
-        "winning_ratio": round(total_wins / total_games, 2) if total_games > 0 else 0,
-        "winning_ratio_as_white": round(total_white_wins / total_white_games, 2)
-        if total_white_games > 0
-        else 0,
-        "winning_ratio_as_black": round(total_black_wins / total_black_games, 2)
-        if total_black_games > 0
-        else 0,
-        "most_frequent_first_move_as_white": f"{most_frequent_white_move[0]} ({most_frequent_white_move[1]} times)"
-        if most_frequent_white_move
-        else None,
-        "most_frequent_first_move_as_black": f"{most_frequent_black_move[0]} ({most_frequent_black_move[1]} times)"
-        if most_frequent_black_move
-        else None,
+        "winning_ratio": safe_ratio(total_wins, total_games),
+        "winning_ratio_as_white": safe_ratio(total_white_wins, total_white_games),
+        "winning_ratio_as_black": safe_ratio(total_black_wins, total_black_games),
+        "most_frequent_first_move_as_white": format_move(
+            get_most_frequent_move(white_first_moves)
+        ),
+        "most_frequent_first_move_as_black": format_move(
+            get_most_frequent_move(black_first_moves)
+        ),
         "wins": total_wins,
-        "loses": total_games - total_wins
+        "loses": total_games - total_wins,
+        "days_played": "'"
+        + "','".join(x["ts"].strftime("%Y-%m-%d") for x in user_stats)
+        + "'",
+        "elo": "'" + "','".join(str(x["elo"]) for x in user_stats) + "'",
     }
 
     return statistics
