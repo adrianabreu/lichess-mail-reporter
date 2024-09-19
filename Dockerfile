@@ -1,22 +1,20 @@
 # The builder image, used to build the virtual environment
-FROM python:3.11-buster as builder
-
-ENV VIRTUAL_ENV=/home/packages/.venv
-COPY --from=ghcr.io/astral-sh/uv:0.4.10 /uv /bin/uv
+FROM ghcr.io/astral-sh/uv:0.4.10-python3.11-bookworm-slim as builder
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+WORKDIR /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project --no-dev
 
 ADD . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
+
+FROM python:3.11-slim-bookworm
+
+# Copy the application from the builder
+COPY --from=builder --chown=app:app /app /app
 WORKDIR /app
-
-RUN uv sync --frozen
-
-# The runtime image, used to just run the code provided its virtual environment
-FROM python:3.11-slim-buster as runtime
-
-WORKDIR /app
-
-ENV VIRTUAL_ENV=/app/.venv \
-    PATH="/app/.venv/bin:$PATH" \
-    PYTHONPATH="/app" 
-
-COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-COPY . .
+# Place executables in the environment at the front of the path
+ENV PATH="/app/.venv/bin:$PATH"
