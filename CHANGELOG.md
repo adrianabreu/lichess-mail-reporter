@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.3.2...v1.4.0) (2024-09-19)
+
+
+### Features
+
+* :sparkles: Add elo tracker report ([bb34dd3](https://github.com/adrianabreu/lichess-mail-reporter/commit/bb34dd3419af7c0750aa11710d5befc0a6c7590e))
+* :sparkles: Added user elo stats ([89cad11](https://github.com/adrianabreu/lichess-mail-reporter/commit/89cad11e883c6005f8b267eb53d0448ec9f4a112))
+
+
+### Bug Fixes
+
+* :lipstick: Improve chart legend ([b744245](https://github.com/adrianabreu/lichess-mail-reporter/commit/b744245391405d10339f3f8a08f15b39fe9a5cb5))
+
 ## [1.3.2](https://github.com/adrianabreu/lichess-mail-reporter/compare/v1.3.1...v1.3.2) (2024-09-14)
 
 
