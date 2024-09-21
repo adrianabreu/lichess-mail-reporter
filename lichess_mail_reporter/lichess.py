@@ -1,51 +1,5 @@
-
-from typing import Any, Dict, List
-from berserk import Client, utils
+from typing import Any, Dict
 from collections import Counter
-
-
-def get_games(
-    berserk: Client, start_date: int, end_date: int, user: str
-) -> list[Dict[str, Any]]:
-    games = berserk.games.export_by_player(
-        user, since=start_date, until=end_date, max=300
-    )
-    return list(games)
-
-
-def get_user_statistics(
-    berserk: Client, start_date: int, user: str
-) -> List[Dict[str, Any]]:
-    activity_feed = berserk.users.get_activity_feed(user)
-    parsed_data = [
-        {"ts": item["interval"]["end"], "elo": item["games"]["blitz"]["rp"]["after"]}
-        for item in activity_feed
-    ]
-    return list(filter(lambda x: utils.to_millis(x["ts"]) >= start_date, parsed_data))
-
-
-def get_first_move(moves, player_color):
-    moves_list = moves.split()
-    if player_color == "white":
-        return moves_list[0] if moves_list else None
-    elif player_color == "black":
-        return moves_list[1] if len(moves_list) > 1 else None
-    else:
-        raise ValueError("Invalid player color. Use 'white' or 'black'.")
-
-
-def parse_games(games: list[Dict[str, Any]], user: str) -> list[Dict[str, Any]]:
-    parsed_games = [
-        {
-            "result": 1 if game["winner"] == color else 0,
-            "first_move": get_first_move(game["moves"], color),
-            "color": color,
-        }
-        for game in games
-        for color in ("white", "black")
-        if game["players"][color]["user"]["name"] == user
-    ]
-    return parsed_games
 
 
 def calculate_statistics(parsed_games, user_stats) -> Dict[str, Any]:
