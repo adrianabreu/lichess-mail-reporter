@@ -44,10 +44,8 @@ def calculate_statistics(parsed_games, user_stats) -> Dict[str, Any]:
         ),
         "wins": total_wins,
         "loses": total_games - total_wins,
-        "days_played": "'"
-        + "','".join(x["ts"].strftime("%Y-%m-%d") for x in user_stats)
-        + "'",
-        "elo": "'" + "','".join(str(x["elo"]) for x in user_stats) + "'",
+        "days_played": ",".join(f"'{stat['ts'].strftime('%Y-%m-%d')}'" for stat in user_stats),
+        "elo": ",".join(f"'{stat['elo']}'" for stat in user_stats),
     }
 
     return statistics
